@@ -151,7 +151,7 @@ public class BossAI : MonoBehaviour{
         if(_isMOL()){//SpinOutOfFrame
             var rotSpeed=_molP2_attack2FollowSpeed*360*Time.deltaTime;AudioManager.instance.Play("Spin");
             transform.Rotate(new Vector3(0,0,rotSpeed));
-            GetComponent<Rigidbody2D>().velocity=new Vector2(0,7f);
+            GetComponent<Rigidbody2D>().linearVelocity=new Vector2(0,7f);
             if(GetComponent<Follow>()!=null){Destroy(GetComponent<Follow>());}
         }
         if(transform.position.y>15){Destroy(gameObject);}

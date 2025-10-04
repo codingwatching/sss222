@@ -16,9 +16,9 @@ public class GameModeDropdown : MonoBehaviour{
         List<OptionData> options=new List<OptionData>();
         for(var i=0;i<CoreSetup.instance.gamerulesetsPrefabs.Length;i++){
             if(skip.Count==0){
-                options.Add(new OptionData(CoreSetup.instance.gamerulesetsPrefabs[i].cfgName,dd.itemImage.sprite));
+                options.Add(new OptionData(CoreSetup.instance.gamerulesetsPrefabs[i].cfgName,dd.itemImage.sprite,Color.white));
             }else{for(var j=0;j<skip.Count;j++){if(!CoreSetup.instance.gamerulesetsPrefabs[i].cfgName.Contains(skip[j])){
-                    options.Add(new OptionData(CoreSetup.instance.gamerulesetsPrefabs[i].cfgName,dd.itemImage.sprite));
+                    options.Add(new OptionData(CoreSetup.instance.gamerulesetsPrefabs[i].cfgName,dd.itemImage.sprite,Color.white));
             }}}
         }
         dd.ClearOptions();

@@ -151,16 +151,16 @@ public class Enemy : MonoBehaviour{
             if(bullet!=null){
                 if(DBullets!=true){
                     var bt=Instantiate(bullet,transform.position,Quaternion.identity) as GameObject;
-                    bt.GetComponent<Rigidbody2D>().velocity=new Vector2(0,-bulletSpeed);
+                    bt.GetComponent<Rigidbody2D>().linearVelocity=new Vector2(0,-bulletSpeed);
                     if(bt.GetComponent<Tag_PauseVelocity>()==null)bt.AddComponent<Tag_PauseVelocity>();
                 }else{
                     var pos1=new Vector2(transform.position.x+bulletDist,transform.position.y);
                     var bt1=Instantiate(bullet,pos1,Quaternion.identity) as GameObject;
-                    bt1.GetComponent<Rigidbody2D>().velocity=new Vector2(0,-bulletSpeed);
+                    bt1.GetComponent<Rigidbody2D>().linearVelocity=new Vector2(0,-bulletSpeed);
                     if(bt1.GetComponent<Tag_PauseVelocity>()==null)bt1.AddComponent<Tag_PauseVelocity>();
                     var pos2=new Vector2(transform.position.x - bulletDist, transform.position.y);
                     var bt2=Instantiate(bullet,pos2,Quaternion.identity) as GameObject;
-                    bt2.GetComponent<Rigidbody2D>().velocity=new Vector2(0,-bulletSpeed);
+                    bt2.GetComponent<Rigidbody2D>().linearVelocity=new Vector2(0,-bulletSpeed);
                     if(bt2.GetComponent<Tag_PauseVelocity>()==null)bt2.AddComponent<Tag_PauseVelocity>();
                 }
             }else{Debug.LogWarning("Bullet not asigned");}
@@ -172,7 +172,7 @@ public class Enemy : MonoBehaviour{
     void FlyOff(){
         if(Player.instance==null){
             shooting=false;
-            rb.velocity=new Vector2(0,3f);
+            rb.linearVelocity=new Vector2(0,3f);
         }
     }
     bool dead;

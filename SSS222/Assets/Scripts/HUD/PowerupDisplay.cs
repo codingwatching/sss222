@@ -13,6 +13,7 @@ public class PowerupDisplay : MonoBehaviour{
     [SerializeField] TextMeshProUGUI txt;
     [SerializeField] Image highlightIMG;
     [SerializeField] Color highlightTimerColor=new Color(40/255,25/255,250/255,60/255);
+    [SerializeField] bool displayInfinity=false;
     [Header("Values")]
     public int number=0;
     [ReadOnly]public string pwrup;
@@ -63,7 +64,10 @@ public class PowerupDisplay : MonoBehaviour{
                 if(!String.IsNullOrEmpty(pwrup)){
                     if(bg!=null)bg.color=bgcolor;
                     if((ammo<=0&&ammo>-5)||(displayTimerTxt&&timer<=0&&timer>-5)){txt.text="?";}
-                    if((ammo==-5)||(displayTimerTxt&&timer>-5)){txt.text="∞";}
+                    if((ammo==-5)||(displayTimerTxt&&timer>-5)){
+                        if(displayInfinity){txt.text="∞";}
+                        else{txt.text="";}
+                    }
                     else{if(!displayTimerTxt){txt.text=ammo.ToString();}else{txt.text=timer.ToString();}}
                 }else{txt.text="";if(bg!=null)bg.color=Color.clear;}
             }else{Debug.LogWarning("No txt obj assigned!");}

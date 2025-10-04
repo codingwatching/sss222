@@ -52,6 +52,8 @@ public class ModeInfoManager : MonoBehaviour{
         
         //yield return new WaitForSecondsRealtime(0.02f);
         foreach(Button bt in _mainTransform.GetComponent<SandboxCanvas>()._powerupInventoryGameObject().transform.GetChild(0).GetComponentsInChildren<Button>(true)){bt.interactable=false;}
+        foreach(Button bt in _mainTransform.GetComponent<SandboxCanvas>().getWavesPanel().GetComponentsInChildren<Button>(true)){bt.interactable=false;}
+        foreach(Button bt in _mainTransform.GetComponent<SandboxCanvas>().getDisruptersPanel().GetComponentsInChildren<Button>(true)){bt.interactable=false;}
         for(var i=2;i<_mainTransform.childCount;i++){//skip Default Panel
             var _transform=_mainTransform.GetChild(i);
             foreach(Tag_SandboxEditableButton c in _transform.GetComponentsInChildren<Tag_SandboxEditableButton>(true)){c.GetComponent<Button>().interactable=false;}

@@ -18,9 +18,9 @@ public class StatsSocialDropdown : MonoBehaviour{
         List<OptionData> options=new List<OptionData>();
         for(var i=0;i<StatsAchievsManager.instance.statsGamemodesList.Count;i++){
             if(skip.Count==0){
-                options.Add(new OptionData(StatsAchievsManager.instance.statsGamemodesList[i].gmName,dd.itemImage.sprite));
+                options.Add(new OptionData(StatsAchievsManager.instance.statsGamemodesList[i].gmName,dd.itemImage.sprite,Color.white));
             }else{for(var j=0;j<skip.Count;j++){if(!StatsAchievsManager.instance.statsGamemodesList[i].gmName.Contains(skip[j])){
-                    options.Add(new OptionData(StatsAchievsManager.instance.statsGamemodesList[i].gmName,dd.itemImage.sprite));
+                    options.Add(new OptionData(StatsAchievsManager.instance.statsGamemodesList[i].gmName,dd.itemImage.sprite,Color.white));
             }}}
         }
         //dd.ClearOptions();

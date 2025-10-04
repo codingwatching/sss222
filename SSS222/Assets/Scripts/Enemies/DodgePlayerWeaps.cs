@@ -54,11 +54,11 @@ public class DodgePlayerWeaps : MonoBehaviour{
 
     void Dodge(){
         if(dist<=distMin && dist>0){
-            rb.velocity=new Vector2(dodgeSpeed*dodgeDir,0f);
+            rb.linearVelocity=new Vector2(dodgeSpeed*dodgeDir,0f);
             dodgeTimer=dodgeTime;
         }
         if(dodgeTimer>0f)dodgeTimer-=Time.deltaTime;
-        if(dodgeTimer<=0)rb.velocity=Vector2.zero;
+        if(dodgeTimer<=0)rb.linearVelocity=Vector2.zero;
     }
 
     void ChangeDir(){

@@ -42,7 +42,7 @@ public class LaunchSwarmBullets : MonoBehaviour {
 			Vector2 projectileMoveDirection = (projectileVector - startPoint).normalized * moveSpeed;
 
 			var proj = Instantiate (projectile, startPoint, Quaternion.identity);
-			proj.GetComponent<Rigidbody2D> ().velocity = 
+			proj.GetComponent<Rigidbody2D> ().linearVelocity = 
 				new Vector2 (projectileMoveDirection.x, projectileMoveDirection.y);
 
 			angle += angleStep;

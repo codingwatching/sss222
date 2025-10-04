@@ -17,7 +17,7 @@ public class StickTo : MonoBehaviour{
     private void OnTriggerEnter2D(Collider2D other) {
         if((other.gameObject.CompareTag("Enemy")&&other.gameObject.GetComponent<VortexWheel>()==null&&enemies==true)||(other.gameObject.CompareTag("Player")&&player==true)){
             GetComponent<FollowOneObject>().targetObj=other.gameObject;
-            GetComponent<Rigidbody2D>().velocity=Vector2.zero;
+            GetComponent<Rigidbody2D>().linearVelocity=Vector2.zero;
             if(GetComponent<ParticleDelay>()!=null){GetComponent<ParticleDelay>().on=true;}
             if(sound==true){AudioManager.instance.Play(sfx);}
         }

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -97,8 +98,10 @@ public class SandboxCanvas : MonoBehaviour{     public static SandboxCanvas inst
     int sandboxSaveFormat=1;
 #endregion
 #region//Base
+    void Awake(){instance=this;}
     void Start(){
-        instance=this;
+        CreateMissingDirectories();
+
         if(!String.IsNullOrEmpty(GameManager.instance.GetTempSandboxSaveName())){
             SelectPreset(GameManager.instance.GetTempSandboxSaveName());
         }
@@ -450,8 +453,8 @@ public class SandboxCanvas : MonoBehaviour{     public static SandboxCanvas inst
         Transform t=yoursModesListTransform.Find(str+"-PresetButton");if(t!=null){GameObject goF=t.gameObject;goF.GetComponent<Image>().color=selectedColor;}
     }
     public string _sandboxDataDir(){return Application.persistentDataPath+"/SandboxData";}
-    public string _sandboxRecycleDir(){return _sandboxDataDir()+"/RecycleBin";}
     public string _sandboxSavesDir(){return _sandboxDataDir()+"/SandboxSaves";}
+    public string _sandboxRecycleDir(){return _sandboxDataDir()+"/RecycleBin";}
     public string _sandboxShipSkinsDir(){return _sandboxDataDir()+"/ShipSkins";}
     public string _currentSandboxFilePath(){return _sandboxSavesDir()+"/"+curSaveFileName+".json";}
     public string _selectedSandboxFilePath(){return _sandboxSavesDir()+"/"+saveSelected+".json";}
@@ -488,7 +491,7 @@ public class SandboxCanvas : MonoBehaviour{     public static SandboxCanvas inst
                 }
             }else{
                 Debug.LogWarning("No file at: "+_selectedSandboxFilePath());
-                SavePopup("<color=orange> No file by name: </color>"+saveSelected);
+                if(GetCountSaveFiles()>0){SavePopup("<color=orange> No file by name: </color>"+saveSelected);}
             }
         }else{
             SavePopup("<color=orange> File name is empty </color>");
@@ -502,7 +505,7 @@ public class SandboxCanvas : MonoBehaviour{     public static SandboxCanvas inst
                 "Are you sure you want to delete \n \u0022"+saveSelected+"\u0022 ?";
             }else{
                 Debug.LogWarning("No file at: "+_selectedSandboxFilePath());
-                SavePopup("<color=orange> No file by name: </color>"+saveSelected);
+                if(GetCountSaveFiles()>0){SavePopup("<color=orange> No file by name: </color>"+saveSelected);}
             }
         }else{
             SavePopup("<color=orange> File name is empty </color>");
@@ -661,6 +664,14 @@ public class SandboxCanvas : MonoBehaviour{     public static SandboxCanvas inst
             SavePopup("<color=orange> File name is empty </color>");
         }
         CloseSavingPrompts();
+    }
+    public void CreateMissingDirectories(bool all=false){
+        if(!ES3.DirectoryExists(_sandboxDataDir())){Directory.CreateDirectory(_sandboxDataDir());}
+        if(!ES3.DirectoryExists(_sandboxSavesDir())){Directory.CreateDirectory(_sandboxSavesDir());}
+        if(all){
+            if(!ES3.DirectoryExists(_sandboxRecycleDir())){Directory.CreateDirectory(_sandboxRecycleDir());}
+            if(!ES3.DirectoryExists(_sandboxShipSkinsDir())){Directory.CreateDirectory(_sandboxShipSkinsDir());}
+        }
     }
     public void BrowseSandboxData(){Application.OpenURL("file:///"+_sandboxDataDir());}
     public void BrowseSandboxSaves(){Application.OpenURL("file:///"+_sandboxSavesDir());}
@@ -1213,7 +1224,7 @@ public class SandboxCanvas : MonoBehaviour{     public static SandboxCanvas inst
         List<TMPro.TMP_Dropdown.OptionData> options=new List<TMPro.TMP_Dropdown.OptionData>();
         if(wavesSpawnTypeDropdown.options.Count==1){
             for(var i=0;i<wavesSpawnReqsTypes.Length;i++){
-                options.Add(new TMPro.TMP_Dropdown.OptionData(wavesSpawnReqsTypes[i],wavesSpawnTypeDropdown.itemImage.sprite));
+                options.Add(new TMPro.TMP_Dropdown.OptionData(wavesSpawnReqsTypes[i],wavesSpawnTypeDropdown.itemImage.sprite,Color.white));
             }
             wavesSpawnTypeDropdown.ClearOptions();
             wavesSpawnTypeDropdown.AddOptions(options);
@@ -1257,7 +1268,7 @@ public class SandboxCanvas : MonoBehaviour{     public static SandboxCanvas inst
         List<TMPro.TMP_Dropdown.OptionData> options=new List<TMPro.TMP_Dropdown.OptionData>();
         if(pwrupsSpawnTypeDropdown.options.Count==1){
             for(var i=0;i<pwrupsSpawnReqsTypes.Length;i++){
-                options.Add(new TMPro.TMP_Dropdown.OptionData(pwrupsSpawnReqsTypes[i],pwrupsSpawnTypeDropdown.itemImage.sprite));
+                options.Add(new TMPro.TMP_Dropdown.OptionData(pwrupsSpawnReqsTypes[i],pwrupsSpawnTypeDropdown.itemImage.sprite,Color.white));
             }
             pwrupsSpawnTypeDropdown.ClearOptions();
             pwrupsSpawnTypeDropdown.AddOptions(options);
@@ -1379,9 +1390,13 @@ public class SandboxCanvas : MonoBehaviour{     public static SandboxCanvas inst
         CountSaveFiles();
     }
     int GetCountSaveFiles(){
-        var listOfValidSaves=ES3.GetFiles(_sandboxSavesDir());
-        listOfValidSaves=listOfValidSaves.Where(x=>x.Contains(".json")).ToArray();
-        return listOfValidSaves.Length;
+        if(!ES3.DirectoryExists(_sandboxSavesDir())){Directory.CreateDirectory(_sandboxSavesDir());}
+        if(ES3.DirectoryExists(_sandboxSavesDir())){
+            var listOfValidSaves=ES3.GetFiles(_sandboxSavesDir());
+            listOfValidSaves=listOfValidSaves.Where(x=>x.Contains(".json")).ToArray();
+            return listOfValidSaves.Length;
+        }
+        return 0;
     }
     void CountSaveFiles(){savesCount=GetCountSaveFiles();}
 
@@ -1486,6 +1501,10 @@ public class SandboxCanvas : MonoBehaviour{     public static SandboxCanvas inst
         if(_saveBuild==-1){_saveBuildString="";}
         return _saveBuildString;
     }
+
+
+    public GameObject getWavesPanel(){return wavesPanel;}
+    public GameObject getDisruptersPanel(){return disruptersPanel;}
 #endregion
 }
 

@@ -319,7 +319,7 @@ public class Player : MonoBehaviour{    public static Player instance;
             }
             if(shootTimer>0)shootTimer-=Time.deltaTime;
             if(shadowInstTimer>0)shadowInstTimer-=Time.deltaTime;
-            rb.velocity=vel;
+            rb.linearVelocity=vel;
             if(!moving){spawnReqsMono.AddStayingTime(Time.deltaTime);GameManager.instance.stayingTimeXP+=Time.deltaTime;/*stayingTimerTotal+=Time.deltaTime;*/timerHpRegen+=Time.deltaTime;}
             if(moving){spawnReqsMono.AddMovingTime(Time.deltaTime);GameManager.instance.movingTimeXP+=Time.deltaTime;//timeFlyingTotal+=Time.deltaTime;timeFlyingCore+=Time.deltaTime;
                 if(_hasStatus("fuel")){
@@ -726,7 +726,7 @@ public class Player : MonoBehaviour{    public static Player instance;
                                     if(i>0){speedoffxL=wp.serialOffsetSpeed.x;speedoffyL=wp.serialOffsetSpeed.y;
                                         if(wp.serialOffsetSpeedE!=Vector2.zero){speedoffxL=UnityEngine.Random.Range(wp.serialOffsetSpeed.x,wp.serialOffsetSpeedE.x);speedoffyL=UnityEngine.Random.Range(wp.serialOffsetSpeed.y,wp.serialOffsetSpeedE.y);}
                                         sL=new Vector2(sL.x-=speedoffxL,sL.y+=speedoffyL);}
-                                    if(bulletL.GetComponent<Rigidbody2D>()!=null)bulletL.GetComponent<Rigidbody2D>().velocity=sL;
+                                    if(bulletL.GetComponent<Rigidbody2D>()!=null)bulletL.GetComponent<Rigidbody2D>().linearVelocity=sL;
                                     //if(bulletR.GetComponent<ShootInArc>()!=null)bulletR.GetComponent<ShootInArc>().Shoot();
                                     if(bulletL.GetComponent<BounceThroughEnemies>()!=null)bulletL.GetComponent<BounceThroughEnemies>().speed=sL.y;
                                     if(bulletL.GetComponent<BounceBetweenEnemies>()!=null)bulletL.GetComponent<BounceBetweenEnemies>().speed=sL.y;
@@ -748,7 +748,7 @@ public class Player : MonoBehaviour{    public static Player instance;
                                     if(i>0){speedoffxR=wp.serialOffsetSpeed.x;speedoffyR=wp.serialOffsetSpeed.y;
                                         if(wp.serialOffsetSpeedE!=Vector2.zero){speedoffxR=UnityEngine.Random.Range(wp.serialOffsetSpeed.x,wp.serialOffsetSpeedE.x);speedoffyR=UnityEngine.Random.Range(wp.serialOffsetSpeed.y,wp.serialOffsetSpeedE.y);}
                                         sR=new Vector2(sR.x+=speedoffxR,sR.y+=speedoffyR);}
-                                    if(bulletR.GetComponent<Rigidbody2D>()!=null)bulletR.GetComponent<Rigidbody2D>().velocity=sR;
+                                    if(bulletR.GetComponent<Rigidbody2D>()!=null)bulletR.GetComponent<Rigidbody2D>().linearVelocity=sR;
                                     //if(bulletR.GetComponent<ShootInArc>()!=null)bulletR.GetComponent<ShootInArc>().Shoot();
                                     if(bulletR.GetComponent<BounceThroughEnemies>()!=null)bulletR.GetComponent<BounceThroughEnemies>().speed=sR.y;
                                     if(bulletR.GetComponent<BounceBetweenEnemies>()!=null)bulletR.GetComponent<BounceBetweenEnemies>().speed=sR.y;

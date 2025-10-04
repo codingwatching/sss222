@@ -41,7 +41,7 @@ public class Goblin : MonoBehaviour{
     }
 
     void Update(){
-        if(powerups!=null&&!bossForm){rb.velocity=new Vector2(Random.Range(2.5f,3f),Random.Range(2.5f,3f));}//Fly off after getting powerup
+        if(powerups!=null&&!bossForm){rb.linearVelocity=new Vector2(Random.Range(2.5f,3f),Random.Range(2.5f,3f));}//Fly off after getting powerup
         if(bossForm)BossAI();
     }
     
@@ -107,7 +107,7 @@ public class Goblin : MonoBehaviour{
         en.health=bossHealth;en.healthMax=bossHealth;
         en.shooting=true;
         pos.x=transform.position.x;transform.rotation=new Quaternion(0,0,0,0);
-        rb.velocity=Vector2.zero;GetComponent<Tag_PauseVelocity>().velPaused=Vector2.zero;
+        rb.linearVelocity=Vector2.zero;GetComponent<Tag_PauseVelocity>().velPaused=Vector2.zero;
         AudioManager.instance.Play("GoblinTransform");
     }
     void BossAI(){

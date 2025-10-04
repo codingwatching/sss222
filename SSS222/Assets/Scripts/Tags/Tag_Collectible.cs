@@ -16,9 +16,9 @@ public class Tag_Collectible : MonoBehaviour{
         if(isDestructible&&GetComponent<HLaserKillThis>()==null)gameObject.AddComponent<HLaserKillThis>();
     }
     public void SetDirSpeed(){
-        if(dir==dir.up)GetComponent<Rigidbody2D>().velocity=Vector2.up*speed;
-        else if(dir==dir.left)GetComponent<Rigidbody2D>().velocity=Vector2.left*speed;
-        else if(dir==dir.right)GetComponent<Rigidbody2D>().velocity=Vector2.right*speed;
-        else GetComponent<Rigidbody2D>().velocity=Vector2.down*speed;
+        if(dir==dir.up)GetComponent<Rigidbody2D>().linearVelocity=Vector2.up*speed;
+        else if(dir==dir.left)GetComponent<Rigidbody2D>().linearVelocity=Vector2.left*speed;
+        else if(dir==dir.right)GetComponent<Rigidbody2D>().linearVelocity=Vector2.right*speed;
+        else GetComponent<Rigidbody2D>().linearVelocity=Vector2.down*speed;
     }
 }

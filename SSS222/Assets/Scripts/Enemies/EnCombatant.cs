@@ -107,8 +107,8 @@ public class EnCombatant : MonoBehaviour{
         //Debug.Log(dist);
     }
     IEnumerator Attack(float stepY){
-        rb.velocity=Vector2.MoveTowards(selfPos,playerPos,stepY*5);
+        rb.linearVelocity=Vector2.MoveTowards(selfPos,playerPos,stepY*5);
         yield return new WaitForSeconds(1f);
-        rb.velocity=Vector2.MoveTowards(selfPos,playerPosYDist,stepY);
+        rb.linearVelocity=Vector2.MoveTowards(selfPos,playerPosYDist,stepY);
     }
 }

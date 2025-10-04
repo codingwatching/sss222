@@ -14,7 +14,7 @@ public class ParabolaLR : MonoBehaviour{
 
         var dir = 1;
         if(Random.Range(0,100)<chanceForR) { dir = -1; }
-        rb.velocity = new Vector2(dir * hspeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(dir * hspeed, rb.linearVelocity.y);
         //transform.position = MathParabola.Parabola(Vector2.zero, Vector2.left, 4f, 4f);
     }
 

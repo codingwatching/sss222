@@ -41,7 +41,7 @@ public class Follow : MonoBehaviour{
             else{targetObj=GameObject.FindGameObjectWithTag(targetTag);}
         }
 
-        if(targetObj==null){rb.velocity=new Vector2(hspeed,-vspeed);}
+        if(targetObj==null){rb.linearVelocity=new Vector2(hspeed,-vspeed);}
         else{
             targetPos=new Vector2(targetObj.transform.position.x,targetObj.transform.position.y);
             selfPos=new Vector2(transform.position.x,transform.position.y);
@@ -50,18 +50,18 @@ public class Follow : MonoBehaviour{
             float step=speedFollow*Time.deltaTime;
             if(followAfterOOR==true){
                 if(dist<distReq){transform.position=Tag_PauseVelocity.MoveTowards(transform.position,targetPos,step);}
-                else{rb.velocity=new Vector2(hspeed,-vspeed);}
+                else{rb.linearVelocity=new Vector2(hspeed,-vspeed);}
             }else{
                 if(dirYYUp==true){
                     if(transform.position.y<targetObj.transform.position.y+OOR_YY){// && transform.position.y>targetObj.transform.position.y - OOR_YY+0.5){
                         if(dist<distReq){transform.position=Tag_PauseVelocity.MoveTowards(transform.position,targetPos,step);}
-                        else{rb.velocity=new Vector2(hspeed,-vspeed);}
-                   }else{rb.velocity=new Vector2(hspeed,-vspeed);}
+                        else{rb.linearVelocity=new Vector2(hspeed,-vspeed);}
+                   }else{rb.linearVelocity=new Vector2(hspeed,-vspeed);}
                 }else{
                     if(transform.position.y>targetObj.transform.position.y-OOR_YY){// && transform.position.y<targetObj.transform.position.y + OOR_YY + 0.5){
                         if(dist<distReq){transform.position=Tag_PauseVelocity.MoveTowards(transform.position,targetPos,step);}
-                        else{rb.velocity=new Vector2(hspeed,-vspeed);}
-                   }else{rb.velocity=new Vector2(hspeed,-vspeed);}
+                        else{rb.linearVelocity=new Vector2(hspeed,-vspeed);}
+                   }else{rb.linearVelocity=new Vector2(hspeed,-vspeed);}
                 }
             }
 

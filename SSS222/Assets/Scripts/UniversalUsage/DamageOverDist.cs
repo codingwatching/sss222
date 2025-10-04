@@ -28,7 +28,7 @@ public class DamageOverDist : MonoBehaviour{
         dmg=Mathf.Clamp(dmg,dmgMin,dmgMax);
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        dist=rb.velocity.y*(Time.time-startTime);
+        dist=rb.linearVelocity.y*(Time.time-startTime);
         //dmgBase*=(dist/dmgBase);
         if(dist>=distCap){
             if(gain==true)dmg+=(dist-distCap)*multiplier;

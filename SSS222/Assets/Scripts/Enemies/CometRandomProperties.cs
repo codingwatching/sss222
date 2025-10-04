@@ -66,7 +66,7 @@ public class CometRandomProperties : MonoBehaviour{
         en.size=new Vector2(en.size.x*size,en.size.y*size);
 
         if(Random.Range(0,100)<lunarCometChance)MakeLunar();
-        rotationSpeed=Random.Range(2.8f,4.7f)*(GetComponent<Rigidbody2D>().velocity.y*-1);
+        rotationSpeed=Random.Range(2.8f,4.7f)*(GetComponent<Rigidbody2D>().linearVelocity.y*-1);
     }
     public int LunarScore(){return Random.Range((int)lunarScore.x,(int)lunarScore.y);}
     bool _ambiencePlayed=false;
@@ -101,7 +101,7 @@ public class CometRandomProperties : MonoBehaviour{
         float sizeL=(float)System.Math.Round(Random.Range(sizeMultLunar.x, sizeMultLunar.y),2);
         en.size=new Vector2(en.size.x*sizeL, en.size.y*sizeL);
         en.healthMax*=lunarHealthMulti;en.health*=lunarHealthMulti;
-        rb.velocity*=lunarSpeedMulti;
+        rb.linearVelocity*=lunarSpeedMulti;
         if(!GameRules.instance.crystalsOn)dropValues[0]=102;
     }
 

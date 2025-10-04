@@ -28,7 +28,7 @@ public class RandomHDir : MonoBehaviour{
         if(randomSpeed==true){
             hspeed=Random.Range(hspeedS, hspeedE);
         }
-        rb.velocity = new Vector2(dir * hspeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(dir * hspeed, rb.linearVelocity.y);
     }
 
     void Update(){
@@ -37,7 +37,7 @@ public class RandomHDir : MonoBehaviour{
             if(timerSpeed<=0){
                 dir*=-1;
                 hspeed=Random.Range(hspeedS, hspeedE);
-                rb.velocity=new Vector2(dir*hspeed,rb.velocity.y);
+                rb.linearVelocity=new Vector2(dir*hspeed,rb.linearVelocity.y);
 
                 if(randomChangeTime==true){timerSpeed=Random.Range(timeToChangeSpeedS,timeToChangeSpeedE);}
                 else{timerSpeed=timeToChangeSpeed;}

@@ -116,10 +116,10 @@ public class CargoShip : MonoBehaviour{
         }
         //foreach(BackflameEffect co in GetComponents<BackflameEffect>()){co.part=pt;}//co.BFlame.transform.eulerAngles=new Vector3(0,0,ptRot);}//co.xx=ptxx;co.yy=ptyy;}
         yield return new WaitForSeconds(0.1f);
-        GetComponent<Rigidbody2D>().velocity=new Vector2(hspeed,vspeed);
+        GetComponent<Rigidbody2D>().linearVelocity=new Vector2(hspeed,vspeed);
         transform.eulerAngles=new Vector3(transform.rotation.x,transform.rotation.y,zRot);
     }
-    public void StopCargo(){GetComponent<Rigidbody2D>().velocity=Vector3.zero;GetComponent<Tag_PauseVelocity>().velPaused=Vector2.zero;}
+    public void StopCargo(){GetComponent<Rigidbody2D>().linearVelocity=Vector3.zero;GetComponent<Tag_PauseVelocity>().velPaused=Vector2.zero;}
 
     void SetPopupImageSprites(){
         //GetComponentInChildren<SimpleAnimController>().AddSimpleAnim(GetComponentInChildren<SimpleAnimController>().GetComponent<UnityEngine.UI.Image>().sprite);

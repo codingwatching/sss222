@@ -16,9 +16,9 @@ public class CstmzCategoryDropdown : MonoBehaviour{
         List<OptionData> options=new List<OptionData>();
         for(var i=0;i<CustomizationInventory.instance._CstmzCategoryNames.Length;i++){
             if(skip.Count==0){
-                options.Add(new OptionData(CustomizationInventory.instance._CstmzCategoryNames[i],dd.itemImage.sprite));
+                options.Add(new OptionData(CustomizationInventory.instance._CstmzCategoryNames[i],dd.itemImage.sprite,Color.white));
             }else{for(var j=0;j<skip.Count;j++){if(!CustomizationInventory.instance._CstmzCategoryNames[i].Contains(skip[j])){
-                    options.Add(new OptionData(CustomizationInventory.instance._CstmzCategoryNames[i],dd.itemImage.sprite));
+                    options.Add(new OptionData(CustomizationInventory.instance._CstmzCategoryNames[i],dd.itemImage.sprite,Color.white));
             }}}
         }
         dd.ClearOptions();

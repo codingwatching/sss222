@@ -62,7 +62,7 @@ public class LeechAttach : MonoBehaviour{
                         }
                     }else{
                         if(follow.selfPos.x<follow.targetPos.x-shake_distance){
-                            rb.velocity=new Vector2(fallSpeed,-fallSpeed);
+                            rb.linearVelocity=new Vector2(fallSpeed,-fallSpeed);
                             follow.enabled=false;
                             detached=true;
                             attached=false;
@@ -77,13 +77,13 @@ public class LeechAttach : MonoBehaviour{
                         if(stage==2&&Input.GetAxis("Horizontal")>0){count++;stage++;}
                         if(stage==3&&Input.GetAxis("Horizontal")<0){count++;stage=0;}
                     }else{
-                        rb.velocity=new Vector2(fallSpeed,-fallSpeed);
+                        rb.linearVelocity=new Vector2(fallSpeed,-fallSpeed);
                         follow.enabled=false;
                         detached=true;
                         attached=false;
                     }
                 }
             }
-        }else{rb.velocity=new Vector2(fallSpeed,-fallSpeed);}
+        }else{rb.linearVelocity=new Vector2(fallSpeed,-fallSpeed);}
     }
 }
