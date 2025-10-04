@@ -8,24 +8,28 @@ using static TMPro.TMP_Dropdown;
 using System.Linq;
 
 public class CstmzCategoryDropdown : MonoBehaviour{
-    [SerializeField]List<string> skip=new List<string>(0);
+    [SerializeField]List<string> skip = new();
     TMP_Dropdown dd;
     void Start(){
         dd=GetComponent<TMP_Dropdown>();
         
-        List<OptionData> options=new List<OptionData>();
-        for(var i=0;i<CustomizationInventory.instance._CstmzCategoryNames.Length;i++){
-            if(skip.Count==0){
-                options.Add(new OptionData(CustomizationInventory.instance._CstmzCategoryNames[i],dd.itemImage.sprite,Color.white));
-            }else{for(var j=0;j<skip.Count;j++){if(!CustomizationInventory.instance._CstmzCategoryNames[i].Contains(skip[j])){
-                    options.Add(new OptionData(CustomizationInventory.instance._CstmzCategoryNames[i],dd.itemImage.sprite,Color.white));
-            }}}
-        }
+        var categoryNames = CustomizationInventory.instance._CstmzCategoryNames;
+
+        var options = categoryNames
+            .Where(name => skip.Count == 0 || !skip.Any(skipName => name.Equals(skipName, StringComparison.OrdinalIgnoreCase)))
+            .Select(name => new OptionData(name, dd.itemImage.sprite, Color.white))
+            .ToList();
+
         dd.ClearOptions();
         dd.AddOptions(options);
         SetValueFromSelected();
     }
+    
     public void SetCategory(){CustomizationInventory.instance.ChangeCategory(dd.options[dd.value].text);}
-    public void SetValue(string str){dd.value=dd.options.FindIndex(d=>d.text.Contains(str));}
-    public void SetValueFromSelected(){dd.value=dd.options.FindIndex(d=>d.text.Contains(CustomizationInventory.instance._CstmzCategoryNames[(int)CustomizationInventory.instance.categorySelected]));}
+    public void SetValue(string str){dd.value=dd.options.FindIndex(d=>d.text.Equals(str, StringComparison.OrdinalIgnoreCase));}
+    public void SetValueFromSelected()
+    {
+        var selectedName = CustomizationInventory.instance._CstmzCategoryNames[(int)CustomizationInventory.instance.categorySelected];
+        dd.value = dd.options.FindIndex(d => d.text.Equals(selectedName, StringComparison.OrdinalIgnoreCase));
+    }
 }

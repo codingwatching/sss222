@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Follow : MonoBehaviour{
-    [HeaderAttribute("Target")]
+    [Header("Target")]
     public Vector2 selfPos;
     public Vector2 targetPos;
     [SerializeField] public GameObject target;
     [SerializeField] string targetTag;
     public GameObject targetObj;
     public float dist;
-    [HeaderAttribute("Properties")]
+    [Header("Properties")]
     [SerializeField] public float distReq=4f;
     [SerializeField] public float speedFollow=5f;
     [SerializeField] public float vspeed=2.4f;
     [SerializeField] public float hspeed=0f;
-    [HeaderAttribute("Rotation")]
+    [Header("Rotation")]
     [SerializeField] public bool rotateTowards=false;
     [SerializeField] float speedRotate=15f;
     [SerializeField] public float angleAdj=-90f;
-    [HeaderAttribute("Other")]
+    [Header("Other")]
     [SerializeField] public bool followAfterOOR;
     [SerializeField] public bool dirYYUp=false;
     [SerializeField] float OOR_YY=1.5f;

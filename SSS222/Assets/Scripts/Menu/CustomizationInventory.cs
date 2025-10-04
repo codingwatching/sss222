@@ -5,16 +5,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
+using System.Linq;
 
 public class CustomizationInventory : MonoBehaviour{    public static CustomizationInventory instance;
-    [HeaderAttribute("Panels")]
+    [Header("Panels")]
     [SceneObjectsOnly][SerializeField] GameObject customizationPanel;
     [SceneObjectsOnly][SerializeField] GameObject lockboxesPanel;
     [SceneObjectsOnly][SerializeField] GameObject lockboxOpeningPanel;
-    [HeaderAttribute("Customization Objects")]
+    [Header("Customization Objects")]
     [SceneObjectsOnly][SerializeField] CstmzCategoryDropdown categoriesDropdown;
     [SceneObjectsOnly][SerializeField] RectTransform typesListContent;
     [AssetsOnly][SerializeField] GameObject cstmzElementPrefab;
+    [SceneObjectsOnly][SerializeField] ScrollRect elementsScrollRect;
     [SceneObjectsOnly][SerializeField] RectTransform elementsListContent;
     [SceneObjectsOnly][SerializeField] GameObject variantsPanel;
     [SceneObjectsOnly][SerializeField] RectTransform variantsListContent;
@@ -25,16 +27,16 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
     [SceneObjectsOnly][SerializeField] Image SsliderIMG;
     [SceneObjectsOnly][SerializeField] Image VsliderIMG;
     [AssetsOnly][SerializeField] Material gradientShader;
-    [HeaderAttribute("Lockboxes Objects")]
+    [Header("Lockboxes Objects")]
     [AssetsOnly][SerializeField] GameObject lockboxElementPrefab;
     [SceneObjectsOnly][SerializeField] RectTransform lockboxElementListContent;
     [SceneObjectsOnly][SerializeField] TextMeshProUGUI starCraft_costText;
     [SceneObjectsOnly][SerializeField] TextMeshProUGUI starCraft_chanceText;
-    [HeaderAttribute("LockboxOpening Objects")]
+    [Header("LockboxOpening Objects")]
     [SceneObjectsOnly][SerializeField] Image lockboxIcon;
     [SceneObjectsOnly][SerializeField] CosmeticDrop cosmeticDropParent;
-    [HeaderAttribute("Properties")]
-    [SerializeField] public CstmzCategory categorySelected=CstmzCategory.twoPiece;
+    [Header("Properties")]
+    [SerializeField] public CstmzCategory categorySelected=CstmzCategory.all;
     [SerializeField] public CstmzType typeSelected=CstmzType.skin;
     [SerializeField] public string skinName="def";
     public Color overlayColor=Color.red;
@@ -85,6 +87,8 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
 
         loaded=true;
         SetType(typeSelected);
+        categorySelected = CstmzCategory.all;
+        categoriesDropdown.SetValueFromSelected();
         yield return new WaitForSecondsRealtime(0.02f);
         RecreateAllLockboxElements();
         yield return new WaitForSecondsRealtime(0.02f);
@@ -224,15 +228,28 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
         }else{AudioManager.instance.Play("Deny");}
     }
 
-    public void RecreateAllElements(){DeleteAllElements();CreateAllElements();HighlightSelectedElement();}
+    public void RecreateAllElements(){
+        DeleteAllElements();
+        CreateAllElements();
+        HighlightSelectedElement();
+        elementsScrollRect.verticalNormalizedPosition = 1f;
+    }
     //public void RecreateAllElements(){StartCoroutine(RecreateAllElementsI());}
-    public IEnumerator RecreateAllElementsI(){DeleteAllElements();
-        yield return new WaitForSeconds(0.01f);CreateAllElements();
-        yield return new WaitForSeconds(0.01f);HighlightSelectedElement();}
+    // public IEnumerator RecreateAllElementsI(){
+    //     DeleteAllElements();
+    //     yield return new WaitForSeconds(0.01f);
+    //     CreateAllElements();
+    //     yield return new WaitForSeconds(0.01f);
+    //     HighlightSelectedElement();
+    //     yield return null;
+    //     elementsScrollRect.verticalNormalizedPosition = 1f;
+    // }
     void DeleteAllElements(){foreach(Transform t in elementsListContent){Destroy(t.gameObject);}}
     void CreateAllElements(){
         if(typeSelected==CstmzType.skin){
-            var currentCategorySkins=AssetsManager.instance.skins.FindAll(x=>x.category==categorySelected);
+            var currentCategorySkins = categorySelected == CstmzCategory.all
+                ? AssetsManager.instance.skins
+                : AssetsManager.instance.skins.Where(x => x.category == categorySelected).ToList();
             foreach(CstmzSkin ge in currentCategorySkins){
                 var go=Instantiate(cstmzElementPrefab,elementsListContent);
                 go.name="SkinElement_"+ge.name;
@@ -244,7 +261,9 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
                 ce.overlayImg.GetComponent<Image>().sprite=ge.sprOverlay;
             }
         }else if(typeSelected==CstmzType.trail){
-            var currentCategoryTrails=AssetsManager.instance.trails.FindAll(x=>x.category==categorySelected);
+            var currentCategoryTrails = categorySelected == CstmzCategory.all
+                ? AssetsManager.instance.trails
+                : AssetsManager.instance.trails.Where(x => x.category == categorySelected).ToList();
             foreach(CstmzTrail ge in currentCategoryTrails){
                 var go=Instantiate(cstmzElementPrefab,elementsListContent);
                 go.name="TrailElement_"+ge.name;
@@ -258,7 +277,9 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
                 AssetsManager.instance.TransformIntoUIParticle(goPt);
             }
         }else if(typeSelected==CstmzType.flares){
-            var currentCategoryFlares=AssetsManager.instance.flares.FindAll(x=>x.category==categorySelected);
+            var currentCategoryFlares = categorySelected == CstmzCategory.all
+                ? AssetsManager.instance.flares
+                : AssetsManager.instance.flares.Where(x => x.category == categorySelected).ToList();
             foreach(CstmzFlares ge in currentCategoryFlares){
                 var go=Instantiate(cstmzElementPrefab,elementsListContent);
                 go.name="FlaresElement_"+ge.name;
@@ -275,7 +296,9 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
                 AssetsManager.instance.TransformIntoUIParticle(goPt,0,-1);
             }
         }else if(typeSelected==CstmzType.deathFx){
-            var currentCategoryDeathFxs=AssetsManager.instance.deathFxs.FindAll(x=>x.category==categorySelected);
+            var currentCategoryDeathFxs = categorySelected == CstmzCategory.all
+                ? AssetsManager.instance.deathFxs
+                : AssetsManager.instance.deathFxs.Where(x => x.category == categorySelected).ToList();
             foreach(CstmzDeathFx ge in currentCategoryDeathFxs){
                 var go=Instantiate(cstmzElementPrefab,elementsListContent);
                 go.name="DeathFxElement_"+ge.name;
@@ -289,7 +312,9 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
                 AssetsManager.instance.TransformIntoUIParticle(goPt,0,-1,true);
             }
         }else if(typeSelected==CstmzType.music){
-            var currentCategoryMusic=AssetsManager.instance.musics.FindAll(x=>x.category==categorySelected);
+            var currentCategoryMusic = categorySelected == CstmzCategory.all
+                ? AssetsManager.instance.musics
+                : AssetsManager.instance.musics.Where(x => x.category == categorySelected).ToList();
             foreach(CstmzMusic ge in currentCategoryMusic){
                 var go=Instantiate(cstmzElementPrefab,elementsListContent);
                 go.name="MusicElement_"+ge.name;
@@ -302,6 +327,7 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
             }
         }
     }
+
     void HighlightSelectedElement(){foreach(Transform t in elementsListContent){
         CstmzElement ce=t.GetComponent<CstmzElement>();
         switch(typeSelected){
@@ -329,6 +355,7 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
                 break;
         }
     }}
+
     void HighlightSelectedType(){foreach(Transform t in typesListContent){
         CstmzTypeElement ce=t.GetComponent<CstmzTypeElement>();
         if(ce.elementType==typeSelected){
@@ -362,21 +389,39 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
         }
     }}
     
-    [HideInInspector]public string[] _CstmzCategoryNames=new string[]{"Special","Shop","ReOne","TwoPiece"};
+    public readonly string[] _CstmzCategoryNames={"All","Special","Shop","ReOne","TwoPiece"};
     public void ChangeCategory(string str){
-        if(str.Contains(_CstmzCategoryNames[0])){categorySelected=CstmzCategory.special;}
-        else if(str.Contains(_CstmzCategoryNames[1])){categorySelected=CstmzCategory.shop;}
-        else if(str.Contains(_CstmzCategoryNames[2])){categorySelected=CstmzCategory.reOne;}
-        else if(str.Contains(_CstmzCategoryNames[3])){categorySelected=CstmzCategory.twoPiece;}
+        if(str.Equals(_CstmzCategoryNames[0], StringComparison.OrdinalIgnoreCase)){categorySelected=CstmzCategory.all;}
+        else if(str.Equals(_CstmzCategoryNames[1], StringComparison.OrdinalIgnoreCase)){categorySelected=CstmzCategory.special;}
+        else if(str.Equals(_CstmzCategoryNames[2], StringComparison.OrdinalIgnoreCase)){categorySelected=CstmzCategory.shop;}
+        else if(str.Equals(_CstmzCategoryNames[3], StringComparison.OrdinalIgnoreCase)){categorySelected=CstmzCategory.reOne;}
+        else if(str.Equals(_CstmzCategoryNames[4], StringComparison.OrdinalIgnoreCase)){categorySelected=CstmzCategory.twoPiece;}
+        // for (int i = 0; i < _CstmzCategoryNames.Length; i++)
+        // {
+        //     if (str.Contains(_CstmzCategoryNames[i]))
+        //     {
+        //         categorySelected = (CstmzCategory)i;
+        //         break;
+        //     }
+        // }
+
         categoriesDropdown.SetValueFromSelected();
         RecreateAllElements();
         CloseVariants();
-    }public void SetCategory(CstmzCategory cat){
+    }
+
+    public void SetCategory(CstmzCategory cat){
         categorySelected=cat;
         categoriesDropdown.SetValueFromSelected();
         RecreateAllElements();
         CloseVariants();
-    }public void SetCategoryFromTypeElement(){
+    }
+    public void SetCategoryFromTypeElement(){
+        if (categorySelected == CstmzCategory.all)
+        {
+            return;
+        }
+
         if(typeSelected==CstmzType.skin){categorySelected=GetSkin(skinName).category;}
         else if(typeSelected==CstmzType.trail){categorySelected=GetTrail(trailName).category;}
         else if(typeSelected==CstmzType.flares){categorySelected=GetFlares(flaresName).category;}
@@ -386,7 +431,6 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
         RecreateAllElements();
         CloseVariants();
     }
-
 
     public void OpenVariants(string str){   string _str=str;
         if(!String.IsNullOrEmpty(_str)){_str=skinName;}
@@ -494,7 +538,7 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
     public Sprite GetSkinSprite(string str){return ShipCustomizationManager.instance.GetSkinSprite(str);}
     public Sprite GetOverlaySprite(string str){return ShipCustomizationManager.instance.GetOverlaySprite(str);}
     CstmzSkinVariant GetSkinVariant(string str,int id){return AssetsManager.instance.GetSkinVariant(str,id);}
-    public bool SkinHasVariants(string str){bool b=false;if(GetSkin(str).variants.Count>0){b=true;}return b;}
+    public bool SkinHasVariants(string str){return GetSkin(str).variants.Count>0;}
     public void SetSkin(string str){skinName=str;if(variantsPanel.activeSelf){variantsPanel.SetActive(false);colorSliders.SetActive(false);}HighlightSelectedElement();HighlightSelectedType();
         if(skinName!="def"){StatsAchievsManager.instance.Customized();}}
 
@@ -557,8 +601,8 @@ public class CustomizationInventory : MonoBehaviour{    public static Customizat
     public static void UnlockDeathFx(string name,bool _outsideOfLockbox=false){if(!_isDeathFxUnlocked(name)){SaveSerial.instance.playerData.deathFxUnlocked.Add(name);if(_outsideOfLockbox)CosmeticPopups.instance.AddToQueue(name,CstmzType.deathFx);}}
     public static void UnlockMusic(string name,bool _outsideOfLockbox=false){if(!_isMusicUnlocked(name)){SaveSerial.instance.playerData.musicUnlocked.Add(name);if(_outsideOfLockbox)CosmeticPopups.instance.AddToQueue(name,CstmzType.music);}}
 
-    public static void _unlockGoldenMoyai(){CustomizationInventory.UnlockSkin("moyaiGold",true);CustomizationInventory.UnlockTrail("goldenflame",true);CustomizationInventory.UnlockFlares("golden",true);}
-    public static void _unlockStargazer(){CustomizationInventory.UnlockSkin("stargazer",true);CustomizationInventory.UnlockTrail("stardust",true);}
-    public static void _unlockMOL(){CustomizationInventory.UnlockSkin("maniac",true);}
-    public static void _unlockSteam(){CustomizationInventory.UnlockSkin("chameleon",true);CustomizationInventory.UnlockMusic("one",true);}
+    public static void _unlockGoldenMoyai(){UnlockSkin("moyaiGold",true);UnlockTrail("goldenflame",true);UnlockFlares("golden",true);}
+    public static void _unlockStargazer(){UnlockSkin("stargazer",true);UnlockTrail("stardust",true);}
+    public static void _unlockMOL(){UnlockSkin("maniac",true);}
+    public static void _unlockSteam(){UnlockSkin("chameleon",true);UnlockMusic("one",true);}
 }

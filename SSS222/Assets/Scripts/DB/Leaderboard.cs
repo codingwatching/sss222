@@ -37,7 +37,7 @@ public class Leaderboard : MonoBehaviour{
         DisplayLeaderboards();
         OpenMainPanel();
         SetGameModesButtons();
-        if(!GameManager.instance.steamAchievsStatsLeaderboards){Destroy(steamGlobalPanel);Destroy(steamFriendsPanel);}
+        // if(!GameManager.instance.steamAchievsStatsLeaderboards){Destroy(steamGlobalPanel);Destroy(steamFriendsPanel);}
     }
     void Update(){
         if(GSceneManager.EscPressed()){Back();}
@@ -55,37 +55,37 @@ public class Leaderboard : MonoBehaviour{
         if(steamFriendsCont!=null){if(steamFriendsCont.childCount>0)for(var i=0;i<steamFriendsCont.childCount;i++){Destroy(steamFriendsCont.GetChild(i).gameObject);}}
     }
     public async void DisplayLeaderboards(){
-        var hgScores=await DBAccess.instance.GetScoresFromDB();
-        var hgScoresSorted=hgScores.OrderByDescending(e=>e.score).ToList();
+        // var hgScores=await DBAccess.instance.GetScoresFromDB();
+        // var hgScoresSorted=hgScores.OrderByDescending(e=>e.score).ToList();
 
-        if(hgScoresSorted.Count>0){
-            if(hgCont.childCount>0){
-                for(var i=0;i<hgCont.childCount;i++){
-                    var go=hgCont.GetChild(i).gameObject;
-                    go.GetComponent<DisplayLeaderboard>().rank=i+1;
-                    var user=await DBAccess.instance.GetUserByIDAsync(hgScoresSorted[i]._id);
-                    go.GetComponent<DisplayLeaderboard>().username=user.username;
-                    go.GetComponent<DisplayLeaderboard>().score=hgScoresSorted[i].score;
+        // if(hgScoresSorted.Count>0){
+        //     if(hgCont.childCount>0){
+        //         for(var i=0;i<hgCont.childCount;i++){
+        //             var go=hgCont.GetChild(i).gameObject;
+        //             go.GetComponent<DisplayLeaderboard>().rank=i+1;
+        //             var user=await DBAccess.instance.GetUserByIDAsync(hgScoresSorted[i]._id);
+        //             go.GetComponent<DisplayLeaderboard>().username=user.username;
+        //             go.GetComponent<DisplayLeaderboard>().score=hgScoresSorted[i].score;
 
-                    go.AddComponent<Button>().onClick.AddListener(()=>go.GetComponent<DisplayLeaderboard>().OpenScoreUsersData());
-                }
-            }
-            for(var i=hgCont.childCount;i<hgScoresSorted.Count;i++){
-                var element=lbElement2;
-                if(i==0)element=lbElement1;
-                var user=await DBAccess.instance.GetUserByIDAsync(hgScoresSorted[i]._id);
-                if(user.username==SaveSerial.instance.hyperGamerLoginData.username&&SaveSerial.instance.hyperGamerLoginData.loggedIn&&(user.username!=""&&SaveSerial.instance.hyperGamerLoginData.username!="")){element=lbElement3;}
-                GameObject go=Instantiate(element,hgCont);
-                string[]name=go.name.Split('_');
-                go.name=name[0]+"_"+(i+1);
-                go.GetComponent<DisplayLeaderboard>().rank=i+1;
-                go.GetComponent<DisplayLeaderboard>().username=user.username;
-                go.GetComponent<DisplayLeaderboard>().score=hgScoresSorted[i].score;
+        //             go.AddComponent<Button>().onClick.AddListener(()=>go.GetComponent<DisplayLeaderboard>().OpenScoreUsersData());
+        //         }
+        //     }
+        //     for(var i=hgCont.childCount;i<hgScoresSorted.Count;i++){
+        //         var element=lbElement2;
+        //         if(i==0)element=lbElement1;
+        //         var user=await DBAccess.instance.GetUserByIDAsync(hgScoresSorted[i]._id);
+        //         if(user.username==SaveSerial.instance.hyperGamerLoginData.username&&SaveSerial.instance.hyperGamerLoginData.loggedIn&&(user.username!=""&&SaveSerial.instance.hyperGamerLoginData.username!="")){element=lbElement3;}
+        //         GameObject go=Instantiate(element,hgCont);
+        //         string[]name=go.name.Split('_');
+        //         go.name=name[0]+"_"+(i+1);
+        //         go.GetComponent<DisplayLeaderboard>().rank=i+1;
+        //         go.GetComponent<DisplayLeaderboard>().username=user.username;
+        //         go.GetComponent<DisplayLeaderboard>().score=hgScoresSorted[i].score;
 
-                go.AddComponent<Button>().onClick.AddListener(()=>go.GetComponent<DisplayLeaderboard>().OpenScoreUsersData());
-            }
-        }
-        if(currentUserScore!=null){currentUserScore.DisplayCurrentUserHighscore();}
+        //         go.AddComponent<Button>().onClick.AddListener(()=>go.GetComponent<DisplayLeaderboard>().OpenScoreUsersData());
+        //     }
+        // }
+        // if(currentUserScore!=null){currentUserScore.DisplayCurrentUserHighscore();}
 
         //Steam Leaderboards
         if(GameManager.instance.steamAchievsStatsLeaderboards){
@@ -167,5 +167,18 @@ public class Leaderboard : MonoBehaviour{
         ClearLeaderboards();
         DisplayLeaderboards();
         OpenMainPanel();
+    }
+
+    public void ToggleLeaderboard(){
+        if (steamGlobalPanel.activeSelf) {
+            steamFriendsPanel.SetActive(true); 
+            steamGlobalPanel.SetActive(false);
+            return;
+        }
+        if(steamFriendsPanel.activeSelf){
+            steamGlobalPanel.SetActive(true);
+            steamFriendsPanel.SetActive(false); 
+            return;
+        }
     }
 }

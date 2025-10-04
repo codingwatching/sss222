@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 [CreateAssetMenu(menuName="Disrupter Config")]
 public class DisrupterConfig:ScriptableObject{//, ISpawnerConfig{//,IEnumerable{
-    [HeaderAttribute("Properties")]
+    [Header("Properties")]
     [InlineButton("VaildateSpawnReqs","Validate")]
     public WaveConfig waveConfig;
     public spawnReqsType spawnReqsType;

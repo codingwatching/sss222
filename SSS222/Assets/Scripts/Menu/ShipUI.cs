@@ -14,6 +14,8 @@ public class ShipUI : MonoBehaviour{
     [ShowIf("followMouse")][SerializeField] bool followMouseOnDrag=true;
     [ShowIf("followMouse")][SerializeField] float speedFollowMouse=500f;
     [ShowIf("followMouse")][SerializeField] float distanceFollowMouse=200f;
+    [ShowIf("followMouse")][SerializeField] bool respectMaxY = true;
+    [ShowIf("followMouse")][SerializeField] float maxY=-300f;
 
     
     [DisableIf("@this.followMouse||this.followSelectedButton")][SerializeField] bool followZones=false;
@@ -43,8 +45,9 @@ public class ShipUI : MonoBehaviour{
         }
         else if(followMouse){
             step=speedFollowMouse*Time.unscaledDeltaTime;
-            MousePressedInBounds();
-            if((followMouseOnDrag&&_mousePressedInBound)||!followMouseOnDrag){
+            if((followMouseOnDrag&&MouseInBounds())||!followMouseOnDrag){
+                // RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(), Input.mousePosition, null, out Vector2 _mousePos);
+                // Debug.Log(_mousePos);
                 if(Input.GetMouseButton(0)||!followMouseOnDrag){
                     transform.position=Vector2.MoveTowards(transform.position,Input.mousePosition,step);
                 }
@@ -80,11 +83,17 @@ public class ShipUI : MonoBehaviour{
             GetComponent<TrailVFX>().trailObj.transform.localPosition=GetComponent<TrailVFX>().offset*-200;
         }}
     }
-    bool _mousePressedInBound=false;
-    void MousePressedInBounds(){
-        if((Input.GetMouseButtonDown(0)&&(Input.mousePosition.x<transform.position.x+distanceFollowMouse&&Input.mousePosition.x>transform.position.x-distanceFollowMouse)&&
-        (Input.mousePosition.y<transform.position.y+distanceFollowMouse&&Input.mousePosition.y>transform.position.y-distanceFollowMouse))||distanceFollowMouse==0){_mousePressedInBound=true;}
-        if(!Input.GetMouseButton(0)){_mousePressedInBound=false;}
+
+    bool MouseInBounds(){
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(), Input.mousePosition, null, out Vector2 _mousePos);
+        if (!respectMaxY || _mousePos.y < maxY)
+        {
+            if (((Input.mousePosition.x < transform.position.x + distanceFollowMouse && Input.mousePosition.x > transform.position.x - distanceFollowMouse) &&
+            (Input.mousePosition.y < transform.position.y + distanceFollowMouse && Input.mousePosition.y > transform.position.y - distanceFollowMouse))
+            || distanceFollowMouse == 0)
+            { return true; }
+        }
+        return false;
     }
 
     public void FlaresPreview(){StartCoroutine(FlaresPreviewI());}

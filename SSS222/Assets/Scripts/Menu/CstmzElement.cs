@@ -19,6 +19,8 @@ public class CstmzElement : MonoBehaviour, IEventSystemHandler, IPointerEnterHan
     [SerializeField] public CstmzRarity rarity;
     [SerializeField] public bool variant;
     [EnableIf("@this.variant")][SerializeField] public int variantId=-1;
+    Color _lockedColor = new(0.15f, 0.15f, 0.15f, 1);
+
     void Awake(){GetComponent<Button>().onClick.AddListener(SetElement);}
     void Update(){
         GetComponent<Image>().color=AssetsManager.instance.GetRarityColor(rarity);
@@ -30,11 +32,11 @@ public class CstmzElement : MonoBehaviour, IEventSystemHandler, IPointerEnterHan
             else{overlayImg.GetComponent<Image>().color=Color.clear;}
         }else{if(overlayImg!=null){Destroy(overlayImg);}if(editButton.activeSelf)editButton.SetActive(false);}
 
-        if(elementType==CstmzType.skin){if(!CustomizationInventory._isSkinUnlocked(elementName)){elementPv.GetComponent<Image>().color=new Color(0.15f,0.15f,0.15f,1);}else{elementPv.GetComponent<Image>().color=Color.white;}}
-        if(elementType==CstmzType.trail){if(!CustomizationInventory._isTrailUnlocked(elementName)){elementPv.GetComponent<Image>().color=new Color(0.15f,0.15f,0.15f,1);}else{elementPv.GetComponent<Image>().color=Color.clear;}}
-        if(elementType==CstmzType.flares){if(!CustomizationInventory._isFlaresUnlocked(elementName)){elementPv.GetComponent<Image>().color=new Color(0.15f,0.15f,0.15f,1);}else{elementPv.GetComponent<Image>().color=Color.clear;}}
-        if(elementType==CstmzType.deathFx){if(!CustomizationInventory._isDeathFxUnlocked(elementName)){elementPv.GetComponent<Image>().color=new Color(0.15f,0.15f,0.15f,1);}else{elementPv.GetComponent<Image>().color=Color.clear;}}
-        if(elementType==CstmzType.music){if(!CustomizationInventory._isMusicUnlocked(elementName)){elementPv.GetComponent<Image>().color=new Color(0.15f,0.15f,0.15f,1);}else{elementPv.GetComponent<Image>().color=Color.white;}}
+        if(elementType==CstmzType.skin){if(!CustomizationInventory._isSkinUnlocked(elementName)){elementPv.GetComponent<Image>().color=_lockedColor;}else { elementPv.GetComponent<Image>().color = Color.white;}}
+        if(elementType==CstmzType.trail){if(!CustomizationInventory._isTrailUnlocked(elementName)){elementPv.GetComponent<Image>().color=_lockedColor;}else { elementPv.GetComponent<Image>().color = Color.white; elementPv.GetComponent<Mask>().showMaskGraphic = false; } }
+        if(elementType==CstmzType.flares){if(!CustomizationInventory._isFlaresUnlocked(elementName)){elementPv.GetComponent<Image>().color=_lockedColor;}else { elementPv.GetComponent<Image>().color = Color.white; elementPv.GetComponent<Mask>().showMaskGraphic = false; } }
+        if(elementType==CstmzType.deathFx){if(!CustomizationInventory._isDeathFxUnlocked(elementName)){elementPv.GetComponent<Image>().color=_lockedColor;}else { elementPv.GetComponent<Image>().color = Color.white; elementPv.GetComponent<Mask>().showMaskGraphic = false; } }
+        if(elementType==CstmzType.music){if(!CustomizationInventory._isMusicUnlocked(elementName)){elementPv.GetComponent<Image>().color=_lockedColor;}else { elementPv.GetComponent<Image>().color = Color.white;}}
 
         if(UIInputSystem.instance.currentSelected==gameObject){if(Input.GetKeyDown(KeyCode.E))OpenVariants();}
         /*if(UIInputSystem.instance.currentSelected==gameObject){

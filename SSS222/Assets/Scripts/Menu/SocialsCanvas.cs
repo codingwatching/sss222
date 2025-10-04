@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class SocialsCanvas : MonoBehaviour{
     [SerializeField] GameObject loginButton;
+    [SerializeField] GameObject leaderboardsButton;
     void Update(){
-        loginButton.GetComponent<Animator>().SetBool("loggedIn",SaveSerial.instance.hyperGamerLoginData.loggedIn);
+        if (loginButton)
+        {
+            loginButton.GetComponent<Animator>().SetBool("loggedIn", SaveSerial.instance.hyperGamerLoginData.loggedIn);
+        }
+        if(leaderboardsButton && !GameManager.instance.steamAchievsStatsLeaderboards)leaderboardsButton.SetActive(false);
     }
     public void LeaderboardsButton(){GSceneManager.instance.LoadLeaderboardsScene();}
     public void AchievementsButton(){GSceneManager.instance.LoadAchievementsScene();}

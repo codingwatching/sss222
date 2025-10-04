@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageOverDist : MonoBehaviour{
-    [HeaderAttribute("Properties")]
+    [Header("Properties")]
     [SerializeField] float dmgBase=5.5f;
     [SerializeField] float dmgMin=0.3f;
     [SerializeField] float dmgMax=10;
     [SerializeField] bool gain;
     [SerializeField] float multiplier=1;
     [SerializeField] float distCap=0;
-    [HeaderAttribute("Current")]
+    [Header("Current")]
     [SerializeField]bool debug;
     [HideInInspector]public float dmg;
     [HideInInspector]public float dist;

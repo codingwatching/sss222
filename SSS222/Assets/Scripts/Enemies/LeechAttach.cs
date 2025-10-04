@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LeechAttach : MonoBehaviour{
-    [HeaderAttribute("Properties")]
+    [Header("Properties")]
     [SerializeField] float catch_distance=1.5f;
     [SerializeField] public float shake_distance = 0.05f;
     [SerializeField] public int count_max = 3;
     [SerializeField] float fallSpeed = 6f;
-    [HeaderAttribute("Current")]
+    [Header("Current")]
     public bool attached;
     public bool detached;
     public int stage = 0;

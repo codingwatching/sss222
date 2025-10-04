@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 [CreateAssetMenu(menuName="Wave Config")]
 public class WaveConfig:ScriptableObject{
-    [HeaderAttribute("Properties")]
+    [Header("Properties")]
     [SerializeField] public new string name="";
     [SerializeField] public Sprite thumbnail;
     //[SerializeField] public float spawnRate=10f;
@@ -18,7 +18,7 @@ public class WaveConfig:ScriptableObject{
     [SerializeField] public bool randomSpeed=false;
     [SerializeField] float moveSpeedS=1f;
     [SerializeField] float moveSpeedE=3f;
-    //[HeaderAttribute("StartToEnd Path")]
+    //[Header("StartToEnd Path")]
     public wavePathType wavePathType;
     [SerializeReference]public wavePathTypeProps wavePaths;
     [System.Serializable]public class wavePathTypeProps{}

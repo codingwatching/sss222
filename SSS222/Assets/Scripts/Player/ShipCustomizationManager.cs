@@ -6,9 +6,9 @@ using UnityEngine.UI;
 using Sirenix.OdinInspector;
 
 public class ShipCustomizationManager : MonoBehaviour{  public static ShipCustomizationManager instance;
-    [HeaderAttribute("Variables")]
+    [Header("Variables")]
     public bool otherUsersData;
-    [HeaderAttribute("Properties")]
+    [Header("Properties")]
     public string skinName="def";
     [SceneObjectsOnly][SerializeField] public GameObject overlayObj;
     public Color overlayColor=Color.red;

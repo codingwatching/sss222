@@ -522,7 +522,7 @@ public class HUDAlignment{
 
 public enum CstmzRarity{def,common,rare,epic,legend}
 [System.Serializable]public class CstmzRarityChance{public CstmzRarity rarity;public float chance;}
-public enum CstmzCategory{special,shop,reOne,twoPiece}
+public enum CstmzCategory{all,special,shop,reOne,twoPiece}
 public enum CstmzType{skin,trail,flares,deathFx,music,bg}
 [System.Serializable]
 public class _ArtistInfo{[PropertyOrder(-1)]public string artist;}
