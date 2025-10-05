@@ -473,6 +473,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
+      propertyPath: bgMaterial.pixelate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
+        type: 3}
       propertyPath: startingPosPlayer.y
       value: -6
       objectReference: {fileID: 0}
@@ -633,7 +638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: disrupterList.Array.data[2]
+      propertyPath: 'disrupterList.Array.data[2]'
       value: 
       objectReference: {fileID: 11400000, guid: abc9b5889dd7ebf41be610bdd807f27e,
         type: 2}
@@ -907,31 +912,31 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 64d66b7c328eef6449e06a1c71f2dce2, type: 2}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: weaponProperties.Array.data[0]
+      propertyPath: 'weaponProperties.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: da916730931875347ab349643d645f00,
         type: 2}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: weaponProperties.Array.data[1]
+      propertyPath: 'weaponProperties.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 39cc985f12878e34ab0b890ac4b1bcbf,
         type: 2}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: weaponProperties.Array.data[2]
+      propertyPath: 'weaponProperties.Array.data[2]'
       value: 
       objectReference: {fileID: 11400000, guid: ff79e4bf5a90ac14fbd6733d23b917c0,
         type: 2}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: weaponProperties.Array.data[3]
+      propertyPath: 'weaponProperties.Array.data[3]'
       value: 
       objectReference: {fileID: 11400000, guid: ec50b4ba40db4c24b81300129f10d2e3,
         type: 2}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: weaponProperties.Array.data[4]
+      propertyPath: 'weaponProperties.Array.data[4]'
       value: 
       objectReference: {fileID: 11400000, guid: e8c1a786afa19d14a92cd6e67a85ce8f,
         type: 2}
@@ -1253,27 +1258,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: cometSettings.sprites.Array.data[0]
+      propertyPath: 'cometSettings.sprites.Array.data[0]'
       value: Comet0_classic
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: cometSettings.sprites.Array.data[1]
+      propertyPath: 'cometSettings.sprites.Array.data[1]'
       value: Comet1_classic
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: cometSettings.sprites.Array.data[2]
+      propertyPath: 'cometSettings.sprites.Array.data[2]'
       value: Comet2_classic
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: cometSettings.sprites.Array.data[3]
+      propertyPath: 'cometSettings.sprites.Array.data[3]'
       value: Comet3_classic
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: cometSettings.sprites.Array.data[4]
+      propertyPath: 'cometSettings.sprites.Array.data[4]'
       value: Comet4_classic
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
@@ -1373,22 +1378,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: managedReferences[7402535153654038532]
+      propertyPath: 'managedReferences[7402535153654038532]'
       value: Assembly-CSharp spawnScore
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: managedReferences[7402535153654038533]
+      propertyPath: 'managedReferences[7402535153654038533]'
       value: Assembly-CSharp spawnReqs
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: managedReferences[7402535153654038534]
+      propertyPath: 'managedReferences[7402535153654038534]'
       value: Assembly-CSharp spawnScore
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,
         type: 3}
-      propertyPath: managedReferences[7402535153654038535]
+      propertyPath: 'managedReferences[7402535153654038535]'
       value: Assembly-CSharp spawnReqs
       objectReference: {fileID: 0}
     - target: {fileID: 1938246018583424785, guid: 5970a4153d8f26b47a04558f381b9897,

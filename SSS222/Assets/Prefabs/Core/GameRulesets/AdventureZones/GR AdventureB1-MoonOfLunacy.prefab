@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 660924726827842043, guid: 3ed435af9cf40c9489efd9ad88a6e37e,
@@ -165,6 +166,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3525102429318315049, guid: 3ed435af9cf40c9489efd9ad88a6e37e,
         type: 3}
+      propertyPath: bgMaterial.pixelate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525102429318315049, guid: 3ed435af9cf40c9489efd9ad88a6e37e,
+        type: 3}
       propertyPath: bossIdkXD.giveScore
       value: 0
       objectReference: {fileID: 0}
@@ -277,37 +283,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3525102429318315049, guid: 3ed435af9cf40c9489efd9ad88a6e37e,
         type: 3}
-      propertyPath: disrupterList.Array.data[0]
+      propertyPath: 'disrupterList.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3525102429318315049, guid: 3ed435af9cf40c9489efd9ad88a6e37e,
         type: 3}
-      propertyPath: disrupterList.Array.data[1]
+      propertyPath: 'disrupterList.Array.data[1]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3525102429318315049, guid: 3ed435af9cf40c9489efd9ad88a6e37e,
         type: 3}
-      propertyPath: disrupterList.Array.data[2]
+      propertyPath: 'disrupterList.Array.data[2]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3525102429318315049, guid: 3ed435af9cf40c9489efd9ad88a6e37e,
         type: 3}
-      propertyPath: disrupterList.Array.data[3]
+      propertyPath: 'disrupterList.Array.data[3]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3525102429318315049, guid: 3ed435af9cf40c9489efd9ad88a6e37e,
         type: 3}
-      propertyPath: disrupterList.Array.data[4]
+      propertyPath: 'disrupterList.Array.data[4]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3525102429318315049, guid: 3ed435af9cf40c9489efd9ad88a6e37e,
         type: 3}
-      propertyPath: disrupterList.Array.data[5]
+      propertyPath: 'disrupterList.Array.data[5]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3525102429318315049, guid: 3ed435af9cf40c9489efd9ad88a6e37e,
         type: 3}
-      propertyPath: disrupterList.Array.data[6]
+      propertyPath: 'disrupterList.Array.data[6]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3525102429318315049, guid: 3ed435af9cf40c9489efd9ad88a6e37e,
@@ -740,4 +746,7 @@ PrefabInstance:
       value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ed435af9cf40c9489efd9ad88a6e37e, type: 3}

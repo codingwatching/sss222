@@ -49,6 +49,7 @@ public class SettingsMenu : MonoBehaviour{      public static SettingsMenu insta
     [SceneObjectsOnly][SerializeField]Toggle particlesToggle;
     [SceneObjectsOnly][SerializeField]Toggle screenflashToggle;
     [SceneObjectsOnly][SerializeField]Toggle playerWeaponsFadeToggle;
+    [SceneObjectsOnly][SerializeField]Toggle gradientBackgroundSidesToggle;
 
     [SceneObjectsOnly][SerializeField]Toggle classicHudToggle;
     [SceneObjectsOnly][SerializeField]Slider hudVis_graphicsSlider;
@@ -98,6 +99,7 @@ public class SettingsMenu : MonoBehaviour{      public static SettingsMenu insta
         particlesToggle.isOn=settingsData.particles;
         screenflashToggle.isOn=settingsData.screenflash;
         playerWeaponsFadeToggle.isOn=settingsData.playerWeaponsFade;
+        gradientBackgroundSidesToggle.isOn=settingsData.gradientBackgroundSides;
 
         classicHudToggle.isOn=settingsData.classicHUD;
         hudVis_graphicsSlider.value=settingsData.hudVis_graphics;
@@ -295,7 +297,7 @@ public class SettingsMenu : MonoBehaviour{      public static SettingsMenu insta
         if(isOn==true&&postProcessVolume!=null){postProcessVolume.enabled=true;}
         if(isOn==false&&FindObjectOfType<PostProcessVolume>()!=null){FindObjectOfType<PostProcessVolume>().enabled=false;}//Destroy(FindObjectOfType<PostProcessVolume>());}
     }
-
+    public void SetGradientBackgroundSides(bool val) { settingsData.gradientBackgroundSides = val; foreach (Tag_BGGradient bg in FindObjectsByType<Tag_BGGradient>(FindObjectsSortMode.None)) { bg.SetEnabled(val); } }
     public void SetClassicHud(bool val){if(GameCanvas._isPossibleToUpscaleHud()){settingsData.classicHUD=val;if(GameCanvas.instance!=null){GameCanvas.instance.ChangeHUDAligment();}}}
     public void SetHudVis_Graphics(float val){settingsData.hudVis_graphics=val;}
     public void SetHudVis_Text(float val){settingsData.hudVis_text=val;}

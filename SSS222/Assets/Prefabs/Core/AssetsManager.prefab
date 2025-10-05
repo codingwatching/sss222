@@ -625,7 +625,7 @@ MonoBehaviour:
     sprOverlay: {fileID: 0}
     variants: []
   - artist: 
-    displayName: Motherboard
+    displayName: Mobo
     name: motherboard
     rarity: 2
     category: 3
@@ -658,7 +658,7 @@ MonoBehaviour:
     sprOverlay: {fileID: 0}
     variants: []
   - artist: Ubzet
-    displayName: Rainbow
+    displayName: Reibow
     name: rainbow
     rarity: 4
     category: 3
@@ -840,7 +840,7 @@ MonoBehaviour:
     rarity: 2
     category: 3
     part: {fileID: 100000, guid: 83eea72fc297ad548a9f0ae07fad1a92, type: 3}
-  - displayName: Rainbow
+  - displayName: Reibow
     name: rainbow
     rarity: 4
     category: 3
@@ -902,7 +902,7 @@ MonoBehaviour:
     parts:
     - {fileID: 100000, guid: e41d97f39561ac748bc5980645b1d885, type: 3}
     - {fileID: 100000, guid: 3754ce3b2b177ba4bb6127bd5b1e99cd, type: 3}
-  - displayName: Rainbow
+  - displayName: Reibow
     name: rainbow
     rarity: 4
     category: 3

@@ -159,6 +159,9 @@ public class AssetsManager : MonoBehaviour{	public static AssetsManager instance
         _mat.SetFloat("_HsvBright",shaderMatProps.value*2);
         _mat.SetFloat("_NegativeAmount",shaderMatProps.negative);
         _mat.SetFloat("_PixelateSize",Mathf.Clamp(shaderMatProps.pixelate*512,4,512));
+		if(shaderMatProps.pixelate >= 1){
+			_mat.DisableKeyword("PIXELATE_ON");
+		}
         _mat.SetFloat("_BlurIntensity",shaderMatProps.blur*100);
         _mat.SetFloat("_BlurHD",Convert.ToSingle(shaderMatProps.lowResBlur));
 		return _mat;

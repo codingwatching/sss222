@@ -1736,6 +1736,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c65d768f3c3f0f84da827b9eb6a21670, type: 3}
+--- !u!1 &1054519628 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2256186222304378785, guid: 9c31fcef3b72c694095fd2d3da75b5af,
+    type: 3}
+  m_PrefabInstance: {fileID: 1251236274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1054519630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054519628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4728687297bed011fa9ba20494fe957c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tag_BGGradient
 --- !u!1001 &1093842528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2074,7 +2092,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4433596660368578273, guid: 9c31fcef3b72c694095fd2d3da75b5af,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1501167249}
+    - targetCorrespondingSourceObject: {fileID: 2256186222304378785, guid: 9c31fcef3b72c694095fd2d3da75b5af,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1054519630}
   m_SourcePrefab: {fileID: 100100000, guid: 9c31fcef3b72c694095fd2d3da75b5af, type: 3}
 --- !u!1001 &1323206847
 PrefabInstance:
@@ -2391,6 +2417,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1459536995}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1501167247 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4433596660368578273, guid: 9c31fcef3b72c694095fd2d3da75b5af,
+    type: 3}
+  m_PrefabInstance: {fileID: 1251236274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1501167249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501167247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4728687297bed011fa9ba20494fe957c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tag_BGGradient
 --- !u!1 &1543688377
 GameObject:
   m_ObjectHideFlags: 0

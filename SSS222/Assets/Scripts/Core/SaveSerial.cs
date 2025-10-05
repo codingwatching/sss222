@@ -294,6 +294,7 @@ public class SaveSerial : MonoBehaviour{	public static SaveSerial instance;
 		public bool dmgPopups=true;
 		public bool particles=true;		
 		public bool screenflash=true;
+		public bool gradientBackgroundSides=true;
 		
 		public bool classicHUD=false;
 		public bool playerWeaponsFade=true;
